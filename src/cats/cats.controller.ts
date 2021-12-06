@@ -1,18 +1,24 @@
-import { Controller, Get, Param, Req } from '@nestjs/common';
+import { Controller, Get, Param, Req, Post, Body } from '@nestjs/common';
 import { Request } from 'express';
+import { createCatDto } from './create-cat.dto';
 
 @Controller('cats')
 export class CatsController {
   @Get(':id')
   findOne(@Param() params): string {
-    console.log('watch');
+    // console.log('watch');
     return `This actions returns a #${params.id} cat`;
   }
 
-  // @Get()
-  // ddd(): string {
-  //   return 'xxx';
+  // @Post()
+  // create(): string {
+  //   return 'this actions adds a new cat';
   // }
+
+  @Post()
+  async create(@Body() createCatDto: createCatDto) {
+    return `This actions adds a new cat `;
+  }
 
   @Get()
   findAll(@Req() request: Request): string {
