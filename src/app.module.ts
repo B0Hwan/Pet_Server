@@ -13,9 +13,9 @@ import {join} from "path";
 @Module({
   imports: [
     CatsModule,
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'client'),
-    }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', 'static'),
+    // }),
   ],
   controllers: [AppController, CatsController],
   providers: [AppService, CatsService, ChatGateway],
