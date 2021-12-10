@@ -5,12 +5,20 @@ import { CatsController } from './cats/cats.controller';
 import { CatsService } from './cats/cats.service';
 import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { ChatGateway } from './chat.gateway';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import {join} from "path";
 
 //new branch
 @Module({
-  imports: [CatsModule],
+  imports: [
+    CatsModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'client'),
+    }),
+  ],
   controllers: [AppController, CatsController],
-  providers: [AppService, CatsService],
+  providers: [AppService, CatsService, ChatGateway],
 })
 export class AppModule implements NestModule{
   configure(consumer: MiddlewareConsumer) {
